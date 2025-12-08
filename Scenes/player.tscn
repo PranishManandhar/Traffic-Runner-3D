@@ -1,35 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfujo54fnnkjc"]
+[gd_scene load_steps=4 format=3 uid="uid://bfujo54fnnkjc"]
 
-[ext_resource type="Script" uid="uid://bx357l5pq03xj" path="res://Script/player.gd" id="1_d2cbi"]
+[ext_resource type="Script" uid="uid://7uuwnfqjqoxd" path="res://Script/playerMovement.gd" id="1_cvnsp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d2cbi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
-
 [node name="player" type="RigidBody3D"]
 axis_lock_angular_z = true
 lock_rotation = true
+script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_d2cbi")
 debug_color = Color(0.8419274, 0.38221663, 0, 0.41960785)
 
-[node name="player" type="CharacterBody3D" parent="."]
-script = ExtResource("1_d2cbi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="player"]
-mesh = SubResource("CapsuleMesh_sh265")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
-shape = SubResource("CapsuleShape3D_4flbx")
-disabled = true
-
-[node name="TwistPivot" type="Node3D" parent="player"]
+[node name="TwistPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1910194, -4.9843845)
 
-[node name="pitchpivot" type="Node3D" parent="player/TwistPivot"]
+[node name="pitchpivot" type="Node3D" parent="TwistPivot"]
 
-[node name="Camera3D" type="Camera3D" parent="player/TwistPivot/pitchpivot"]
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/pitchpivot"]
 transform = Transform3D(-0.9991839, -0.02334165, 0.032966573, -0.0035549414, 0.8637852, 0.50384766, -0.040236678, 0.50331926, -0.86316323, 0.13929904, 1.1798795, 3.0953705)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_sh265")
+skeleton = NodePath("")
