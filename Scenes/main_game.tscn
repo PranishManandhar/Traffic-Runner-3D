@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b47kp14ls27mo"]
+[gd_scene load_steps=9 format=3 uid="uid://b47kp14ls27mo"]
 
 [ext_resource type="Script" uid="uid://oyjfrdhkwiv3" path="res://Script/main_game.gd" id="1_0e3vx"]
 [ext_resource type="PackedScene" uid="uid://bfujo54fnnkjc" path="res://Scenes/player.tscn" id="1_1oj5k"]
-[ext_resource type="PackedScene" uid="uid://b1djl7xwksbfb" path="res://Scenes/enemy.tscn" id="2_yx7mw"]
+[ext_resource type="PackedScene" uid="uid://sjtgmn1nonhv" path="res://Scenes/enemy.tscn" id="3_0e3vx"]
+[ext_resource type="Script" uid="uid://bri3npp2u4fe4" path="res://Script/fall_script.gd" id="4_6j5ir"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1oj5k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +18,8 @@ sky = SubResource("Sky_yx7mw")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0e3vx"]
+
 [node name="MainGame" type="Node3D"]
 script = ExtResource("1_0e3vx")
 
@@ -28,8 +31,20 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="player" parent="." instance=ExtResource("1_1oj5k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22491223, 1.8027904, -21.446693)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92580986, -14.567351)
 top_level = true
 
-[node name="Enemy" parent="." instance=ExtResource("2_yx7mw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04723072, 1.9027419, 0.32391834)
+[node name="world border" type="Area3D" parent="."]
+script = ExtResource("4_6j5ir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world border"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.6590543, -12.860644)
+shape = SubResource("WorldBoundaryShape3D_0e3vx")
+
+[node name="Enemy" parent="." instance=ExtResource("3_0e3vx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.40369034, 0, 0.40288258)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.9799819, -0.16300355, 0.11430416, -0.025538221, 0.67232364, 0.7398167, -0.19744213, 0.72208786, -0.66302776, 5, 11.286602, -10.062752)
+
+[connection signal="body_entered" from="world border" to="world border" method="_on_body_entered"]

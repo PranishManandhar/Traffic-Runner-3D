@@ -1,26 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1djl7xwksbfb"]
+[gd_scene load_steps=4 format=3 uid="uid://sjtgmn1nonhv"]
 
-[ext_resource type="Script" uid="uid://cxng1euu5o73a" path="res://Script/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://doc5i8cue51s6" path="res://Script/Enemy.gd" id="1_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://b228dvqt7k2l4" path="res://Assets/car/Car.gltf" id="1_hghv2"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7k104"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xaro"]
-albedo_color = Color(0.70239866, 0, 0.1612902, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7xaro"]
-material = SubResource("StandardMaterial3D_7xaro")
+[sub_resource type="BoxShape3D" id="BoxShape3D_1f0kj"]
+size = Vector3(0.6442361, 0.05002737, 0.390625)
 
 [node name="Enemy" type="RigidBody3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+collision_layer = 2
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_1f0kj")
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_hghv2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_7k104")
+transform = Transform3D(5, 0, 0, 0, 25, 0, 0, 0, 5, -0.29991078, 1.0251443, -0.034179688)
+shape = SubResource("BoxShape3D_1f0kj")
 
-[node name="Enemy" type="CharacterBody3D" parent="."]
-script = ExtResource("1_hghv2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
-shape = SubResource("CapsuleShape3D_7k104")
-disabled = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
-mesh = SubResource("CapsuleMesh_7xaro")
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

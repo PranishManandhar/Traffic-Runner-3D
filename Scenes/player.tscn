@@ -1,17 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfujo54fnnkjc"]
+[gd_scene load_steps=6 format=3 uid="uid://bfujo54fnnkjc"]
 
 [ext_resource type="Script" uid="uid://7uuwnfqjqoxd" path="res://Script/playerMovement.gd" id="1_cvnsp"]
+[ext_resource type="ArrayMesh" uid="uid://bsjo0olc5dhn3" path="res://Assets/greenman/GreenMan.obj" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://c70vn4jq7m3np" path="res://Assets/greenman/skin-greenman.png" id="3_6t5aa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgqql"]
+albedo_texture = ExtResource("3_6t5aa")
+texture_filter = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d2cbi"]
+radius = 0.6542969
+height = 2.4241943
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
-
-[node name="player" type="RigidBody3D"]
+[node name="player" type="RigidBody3D" groups=["Player"]]
 axis_lock_angular_z = true
 lock_rotation = true
 script = ExtResource("1_cvnsp")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.9997544, 0, 0.022163913, 0, 1, 0, -0.022163913, 0, -0.9997544, 0, -0.95396507, 0)
+mesh = ExtResource("2_cvnsp")
+surface_material_override/0 = SubResource("StandardMaterial3D_vgqql")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10787225, 0)
 shape = SubResource("CapsuleShape3D_d2cbi")
 debug_color = Color(0.8419274, 0.38221663, 0, 0.41960785)
 
@@ -21,8 +33,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1910194, -4.9843845)
 [node name="pitchpivot" type="Node3D" parent="TwistPivot"]
 
 [node name="Camera3D" type="Camera3D" parent="TwistPivot/pitchpivot"]
-transform = Transform3D(-0.9991839, -0.02334165, 0.032966573, -0.0035549414, 0.8637852, 0.50384766, -0.040236678, 0.50331926, -0.86316323, 0.13929904, 1.1798795, 3.0953705)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_sh265")
-skeleton = NodePath("")
+transform = Transform3D(-0.9991839, -0.02334165, 0.032966577, -0.0035549414, 0.8637852, 0.50384766, -0.040236678, 0.50331926, -0.86316323, 0.13929904, 1.1798795, 3.0953705)

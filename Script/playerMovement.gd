@@ -1,25 +1,34 @@
 extends RigidBody3D
 
-# Movement parameters
-@export var forward_force := 30.0
-@export var max_speed := 15.0
-@export var mouse_sensitivity := 0.5
-@export var mouse_speed_multiplier := 5
+@export var forward_force: float = 30.0
+@export var max_speed: float = 15.0
+@export var strafe_force: float = 15.0
+
 
 func _ready() -> void:
 	lock_rotation = true
 
-func _physics_process(delta: float) -> void:
-	# Constant forward movement
-	var forward_dir := transform.basis * Vector3(0, 0, 1.0)
-	apply_central_force(forward_dir * forward_force)
-	
-	# Clamp to max speed
-	if abs(linear_velocity.length()) > max_speed:
-		linear_velocity = sign(linear_velocity) * max_speed
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		# Apply lateral velocity based on mouse movement
-		var mouse_dir = -sign(event.relative.x)
-		linear_velocity.x = mouse_sensitivity * mouse_dir
+func _physics_process(delta: float) -> void:
+	_apply_forward_force()
+	_limit_speed()
+	_apply_strafe()
+
+
+func _apply_forward_force() -> void:
+	# Local forward direction (+Z)
+	var forward_dir: Vector3 = transform.basis * -Vector3.FORWARD
+	apply_central_force(forward_dir * forward_force)
+
+
+func _apply_strafe() -> void:
+	# X axis only (left/right)
+	var input_dir := Input.get_vector("right", "left", "straight", "back")
+	var strafe_dir: Vector3 = transform.basis * Vector3(input_dir.x, 0.0, 0.0)
+
+	apply_central_force(strafe_dir * strafe_force)
+
+
+func _limit_speed() -> void:
+	if linear_velocity.length() > max_speed:
+		linear_velocity = linear_velocity.normalized() * max_speed
