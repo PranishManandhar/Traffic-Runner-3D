@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://oyjfrdhkwiv3" path="res://Script/main_game.gd" id="1_0e3vx"]
 [ext_resource type="PackedScene" uid="uid://bfujo54fnnkjc" path="res://Scenes/player.tscn" id="1_1oj5k"]
-[ext_resource type="PackedScene" uid="uid://sjtgmn1nonhv" path="res://Scenes/enemy.tscn" id="3_0e3vx"]
 [ext_resource type="Script" uid="uid://bri3npp2u4fe4" path="res://Script/fall_script.gd" id="4_6j5ir"]
+[ext_resource type="PackedScene" uid="uid://dftv2vnkitabp" path="res://Scenes/UI/main_game_ui.tscn" id="5_mgc0q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1oj5k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,10 +41,10 @@ script = ExtResource("4_6j5ir")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.6590543, -12.860644)
 shape = SubResource("WorldBoundaryShape3D_0e3vx")
 
-[node name="Enemy" parent="." instance=ExtResource("3_0e3vx")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.40369034, 0, 0.40288258)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.9799819, -0.16300355, 0.11430416, -0.025538221, 0.67232364, 0.7398167, -0.19744213, 0.72208786, -0.66302776, 5, 11.286602, -10.062752)
 
+[node name="MainGameUI" parent="." instance=ExtResource("5_mgc0q")]
+
+[connection signal="colliding" from="player" to="." method="_on_player_colliding"]
 [connection signal="body_entered" from="world border" to="world border" method="_on_body_entered"]

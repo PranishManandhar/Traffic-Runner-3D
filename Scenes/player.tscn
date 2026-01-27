@@ -34,3 +34,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1910194, -4.9843845)
 
 [node name="Camera3D" type="Camera3D" parent="TwistPivot/pitchpivot"]
 transform = Transform3D(-0.9991839, -0.02334165, 0.032966577, -0.0035549414, 0.8637852, 0.50384766, -0.040236678, 0.50331926, -0.86316323, 0.13929904, 1.1798795, 3.0953705)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14823198, 0)

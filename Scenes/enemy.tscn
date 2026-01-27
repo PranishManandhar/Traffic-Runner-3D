@@ -9,6 +9,9 @@ size = Vector3(0.6442361, 0.05002737, 0.390625)
 [node name="Enemy" type="RigidBody3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 collision_layer = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_1f0kj")

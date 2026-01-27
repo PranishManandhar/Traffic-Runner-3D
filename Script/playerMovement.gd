@@ -4,6 +4,8 @@ extends RigidBody3D
 @export var max_speed: float = 15.0
 @export var strafe_force: float = 15.0
 
+@onready var raycast = $RayCast3D
+signal colliding
 
 func _ready() -> void:
 	lock_rotation = true
@@ -13,6 +15,7 @@ func _physics_process(delta: float) -> void:
 	_apply_forward_force()
 	_limit_speed()
 	_apply_strafe()
+	detect_collision()
 
 
 func _apply_forward_force() -> void:
@@ -32,3 +35,9 @@ func _apply_strafe() -> void:
 func _limit_speed() -> void:
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
+
+func detect_collision():
+	if raycast.is_colliding():
+		var target = raycast.get_collider()
+		if target.is_in_group("Platform"):
+			emit_signal("colliding")

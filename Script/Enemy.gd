@@ -8,6 +8,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("hit")
 	if body.is_in_group('Player'):
 		body.queue_free()

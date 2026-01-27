@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbnb4n2h4sbe4"]
+
+[sub_resource type="GDScript" id="GDScript_d2jlo"]
+resource_name = "SpawnPlate"
+script/source = "extends Node3D
+
+var spawnables:Array[PackedScene]=[
+	preload(\"res://Scenes/coin.tscn\"),
+	preload(\"res://Scenes/enemy.tscn\")
+]
+
+func _ready()->void:
+	var time :=randf() * 10 #randomized variable
+	var spawnable_object = null
+	if time<2.5:
+#		spawn coins
+		spawnable_object=spawnables[0].instantiate()
+	elif time<5.7:
+#		spawn car
+		spawnable_object=spawnables[1].instantiate()
+	else:
+		print(\"nothing spawned\")
+	
+	if spawnable_object:
+		add_child(spawnable_object) #add to scene as child
+		spawnable_object.global_position = self.global_position #set the position relative to spawnplate
+"
+
+[node name="spawnplate" type="Node3D"]
+script = SubResource("GDScript_d2jlo")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.6729872, -1, -1, 1.3459744, 2, 2)

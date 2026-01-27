@@ -15,9 +15,9 @@ run/main_scene="uid://b47kp14ls27mo"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
+[dotnet]
 
-Global="*res://Script/Global.gd"
+project/assembly_name="tiktok-games"
 
 [filesystem]
 
@@ -29,6 +29,11 @@ import/blender/enabled.web=true
 [global_group]
 
 Player=""
+Platform=""
+
+[gui]
+
+theme/custom_font="uid://cc63ayb0beh42"
 
 [input]
 

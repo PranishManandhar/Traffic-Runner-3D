@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://rvdaubpcibt"]
+
+[ext_resource type="Texture2D" uid="uid://et86aqte3nch" path="res://Assets/Menu assets/Icon -Traffic runner3d.png" id="1_g18y6"]
+[ext_resource type="Texture2D" uid="uid://droc6aa74wvy4" path="res://Assets/Menu assets/background.png" id="1_mjmdf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(579, 325)
+texture = ExtResource("1_mjmdf")
+
+[node name="icon" type="Sprite2D" parent="."]
+position = Vector2(277, 112.00001)
+rotation = -0.2443461
+scale = Vector2(1.6124998, 1.6200001)
+texture = ExtResource("1_g18y6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="play" type="Button" parent="CanvasLayer"]
+offset_left = 107.0
+offset_top = 322.0
+offset_right = 267.0
+offset_bottom = 393.0
+text = "Play"
+
+[node name="About" type="Button" parent="CanvasLayer"]
+offset_left = 102.0
+offset_top = 417.0
+offset_right = 262.0
+offset_bottom = 488.0
+text = "About"
+
+[node name="Settings" type="Button" parent="CanvasLayer"]
+offset_left = 934.0
+offset_top = 541.0
+offset_right = 1094.0
+offset_bottom = 612.0
+text = "Settings"
